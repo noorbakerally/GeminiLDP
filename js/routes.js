@@ -1,7 +1,7 @@
 angular.module('myApp').config(function($routeProvider) {
   $routeProvider
   .when("/", {
-    template : "test"
+    
   })
   .when("/red", {
 	 template : "<h1>Main</h1><p>Click on the links to change this content</p>"

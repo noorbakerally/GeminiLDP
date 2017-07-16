@@ -3,16 +3,24 @@
 	<link rel="stylesheet" href="css/app.css">
 
 	<div ng-app="myApp" ng-controller="myCtrl">
-
-		First Name: <input type="text" ng-model="firstName"><br>
-		Last Name: <input type="text" ng-model="lastName"><br>
-		<br>
-		Full Name: {{firstName + " " + lastName}}
-		<p><a href="#/">Main</a></p>
-
-		<a href="#red">Red</a>
-		<a href="#green">Green</a>
-		<a href="#blue">Blue</a>
+		<!-- as a Dom element -->
+		<treecontrol class="tree-classic"
+		   tree-model="dataForTheTree"
+		   options="treeOptions"
+		   on-selection="showSelected(node)"
+		   selected-node="node1">
+		   employee: {{node.name}} age {{node.age}}
+		</treecontrol>
+		
+		<!-- as an attribute 
+		<div treecontrol class="tree-classic"
+		   tree-model="dataForTheTree"
+		   options="treeOptions"
+		   on-selection="showSelected(node)"
+		   selected-node="node1">
+		   employee: {{node.name}} age {{node.age}}
+		</div>
+		-->
 
 		<div ng-view></div>
 	</div>
