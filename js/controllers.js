@@ -1,4 +1,4 @@
-angular.module('myApp').controller('myCtrl', function($scope) {
+angular.module('myApp').controller('myCtrl', function($scope,$http) {
     $scope.treeOptions = {
     nodeChildren: "children",
     dirSelectable: true,
@@ -26,5 +26,5 @@ $scope.dataForTheTree = [
 	{ "name" : "Albert", "age" : "33", "children" : [] },
 	{ "name" : "Ron", "age" : "29", "children" : [] }
 ];
-
+	var promise = $http.get("http://localhost:8080/marmotta/ldp");
 });
