@@ -13,18 +13,16 @@ angular.module('myApp').controller('myCtrl', function($scope,$http) {
         labelSelected: "a8"
     }
 };
-$scope.dataForTheTree = [
-	{ "name" : "Joe", "age" : "21", "children" : [
-		{ "name" : "Smith", "age" : "42", "children" : [] },
-		{ "name" : "Gary", "age" : "21", "children" : [
-			{ "name" : "Jenifer", "age" : "23", "children" : [
-				{ "name" : "Dani", "age" : "32", "children" : [] },
-				{ "name" : "Max", "age" : "34", "children" : [] }
-			]}
-		]}
-	]},
-	{ "name" : "Albert", "age" : "33", "children" : [] },
-	{ "name" : "Ron", "age" : "29", "children" : [] }
-];
-	var promise = $http.get("http://localhost:8080/marmotta/ldp");
+    $scope.dataForTheTree = [
+    	{ "iri" : "Albert", "age" : "33", "children" : [] }
+    ];
+
+    $scope.showSelected= function (node){
+        
+    };
+    $scope.onNodeToggled= function (node,expanded){
+        console.log(node+" "+expanded);
+        var promise = $http.jsonp("http://localhost:8080/marmotta/ldp");
+    };
+	
 });

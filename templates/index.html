@@ -8,9 +8,11 @@
 		   tree-model="dataForTheTree"
 		   options="treeOptions"
 		   on-selection="showSelected(node)"
+		   on-node-toggle="onNodeToggled(node,expanded)"
 		   selected-node="node1">
-		   employee: {{ node.name }} age {{ node.age }}
+		   employee: {{ node.iri }} 
 		</treecontrol> 
+
 		<!-- as an attribute 
 		<div treecontrol class="tree-classic"
 		   tree-model="dataForTheTree"

@@ -1,5 +1,9 @@
 from flask import Flask
 from flask import render_template
+from flask import request
+import requests 
+import json
+from rdflib import Graph, Literal, BNode, Namespace, RDF, URIRef
 
 app = Flask(__name__)
 
@@ -18,6 +22,42 @@ app.jinja_options = jinja_options
 @app.route("/")
 def hello():
 	return render_template('index.html')
+
+@app.route("/getResource")
+def getResource():
+	ldpr = request.args.get('ldpr')
+
+	r = requests.get(ldpr)
+	print r
+
+	resource = {}
+	resource["iri"] = ldpr
+
+	# get rdf content for resource
+	# get all children
+	# for each children check if container or not
+	# if container add a dummy children
+
+	if (r.status_code == 200):
+		ldprContent = r.text
+		g = Graph()
+		g.parse(data = ldprContent,format="turtle")
+
+		query = "SELECT * WHERE { <resource> <http://www.w3.org/ns/ldp#contains> ?x }"
+		query = query.replace("resource", ldpr)
+		qResult = g.query(query)
+		children = []
+		for row in qResult:
+			iri = row[0]
+			children.append({"iri":iri})
+		resource["children"] = children
+	else:
+		resource["status"] = r.status_code
+
+
+	
+	resourceStr = json.dumps(resource)
+	return resourceStr
 
 if __name__ == "__main__":
 	app.debug = True
