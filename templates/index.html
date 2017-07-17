@@ -49,13 +49,13 @@
 		                	LDPR Type: {{ selectedNode.type }}<br/>
 		                	Resource Content Type: {{ selectedNode.contentType }} 
 		                	<div ng-if="isAllowedContentType(selectedNode.contentType)">
-		                		<textarea style="min-width: 100%;min-height:50%">{{ selectedNode.data }}</textarea>
+		                		<textarea spellcheck="false" style="min-width: 100%;min-height:50%;background-color:#002B36;color:white">{{ selectedNode.data }}</textarea>
 		                	</div>
 		                </div>
 	                </div>
 	                <div ng-if="loading" style="text-align: center">
 	                	
-	                	<img src="%% url_for('static', filename='images/loading.gif') %%"><br/>Loading...
+	                	<img src="%% url_for('static', filename='images/loading.gif') %%"><br/>Loading LDPR:{{ selectedNode.name }}
 	                </div>
 	            </div>
         	</div>

@@ -44,7 +44,7 @@ angular.module('myApp').controller('myCtrl', function($timeout,$rootScope,$scope
     //on node change handler
     $scope.$on('selection-changed', function (e, node) {
         $scope.selectedNode = node;
-        //if (node.fetch == 1) {return;}
+        if (node.fetch == 1) {return;}
         $scope.loading = true;
         getDataService.getData(node).then(function(result) {
             $scope.loading = false;
