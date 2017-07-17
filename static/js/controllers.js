@@ -15,13 +15,14 @@ angular.module('myApp').controller('myCtrl', function($timeout,$rootScope,$scope
             {name: "Node 2.2"}
         ]
     }];
-
-
     $scope.options = {
         expandOnClick:true,
         showIcon: true,
-        
     }
+
+    $scope.$on('selection-changed', function (e, node) {
+        console.log(node);
+    });
 
 
 
