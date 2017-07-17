@@ -49,8 +49,9 @@ def getResource():
 		children = []
 		for row in qResult:
 			iri = row[0]
-			children.append({"iri":iri})
+			children.append({"iri":iri,"fetch":0})
 		resource["children"] = children
+		resource["fetch"] = 1
 	else:
 		resource["status"] = r.status_code
 

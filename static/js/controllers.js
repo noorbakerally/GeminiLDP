@@ -1,4 +1,4 @@
-angular.module('myApp').controller('myCtrl', function($scope,$http) {
+angular.module('myApp').controller('myCtrl', function($timeout,$rootScope,$scope,$http,$route,getDataService) {
     $scope.treeOptions = {
     nodeChildren: "children",
     dirSelectable: true,
@@ -14,15 +14,22 @@ angular.module('myApp').controller('myCtrl', function($scope,$http) {
     }
 };
     $scope.dataForTheTree = [
-    	{ "iri" : "Albert", "age" : "33", "children" : [] }
+    	{ "iri" : "http://localhost:8080/marmotta/ldp", "fetch" : 0, "children" : [] }
     ];
 
+    
+
     $scope.showSelected= function (node){
-        
+        $scope.node = node;
+        getDataService.getData(node).then(function(result) {
+            $scope.node.children = result.children;
+        }, function(){
+            
+        });
     };
+
     $scope.onNodeToggled= function (node,expanded){
-        console.log(node+" "+expanded);
-        var promise = $http.jsonp("http://localhost:8080/marmotta/ldp");
+        
     };
 	
 });

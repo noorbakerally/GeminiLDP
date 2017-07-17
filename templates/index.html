@@ -7,10 +7,11 @@
 		<treecontrol class="tree-classic"
 		   tree-model="dataForTheTree"
 		   options="treeOptions"
+		   selected-node="selectedNode"
 		   on-selection="showSelected(node)"
 		   on-node-toggle="onNodeToggled(node,expanded)"
 		   selected-node="node1">
-		   employee: {{ node.iri }} 
+		   {{ node.iri }} 
 		</treecontrol> 
 
 		<!-- as an attribute 
