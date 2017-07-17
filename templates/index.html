@@ -3,33 +3,24 @@
 	<link rel="stylesheet" href="%% url_for('static', filename='css/app.css') %%">
 
 	<div ng-app="myApp" ng-controller="myCtrl">
-			<!-- as a Dom element -->
-		<treecontrol class="tree-classic"
-		   tree-model="dataForTheTree"
-		   options="treeOptions"
-		   selected-node="selectedNode"
-		   on-selection="showSelected(node)"
-		   on-node-toggle="onNodeToggled(node,expanded)"
-		   selected-node="node1">
-		   {{ node.iri }} 
-		</treecontrol> 
-
-		<!-- as an attribute 
-		<div treecontrol class="tree-classic"
-		   tree-model="dataForTheTree"
-		   options="treeOptions"
-		   on-selection="showSelected(node)"
-		   selected-node="node1">
-		   employee: {{ node.name }} age {{ node.age }}
-		</div>
-		-->
+			<tree nodes='treeNodes' options='options'>
+		
 
 		<div ng-view></div>
 	</div>
 
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.8/angular.js"></script>
 	<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-route.js"></script>
-    	<script src="%% url_for('static', filename='lib/bootstrap/ui-bootstrap-tpls-2.1.3.min.js') %%"></script>
+
+    	
+
+    	<script src="%% url_for('static', filename='lib/angular/angular-animate.min.js') %%"></script>
+    	<script src="%% url_for('static', filename='lib/angular/angular-recursion.js') %%"></script>
+
+    	<script src="%% url_for('static', filename='lib/tree-widget/angular-tree-widget.js') %%"></script>
+		<link rel="stylesheet" href="%% url_for('static', filename='lib/tree-widget/angular-tree-widget.css') %%">
+
+		<script src="%% url_for('static', filename='lib/bootstrap/ui-bootstrap-tpls-2.1.3.min.js') %%"></script>
     	<script src="%% url_for('static', filename='js/app.js') %%"></script>
     	<script src="%% url_for('static', filename='js/controllers.js') %%"></script>
     	<script src="%% url_for('static', filename='js/directives.js') %%"></script>
@@ -37,8 +28,5 @@
     	<script src="%% url_for('static', filename='js/services.js') %%"></script>
     	<script src="%% url_for('static', filename='js/routes.js') %%"></script>
 
-    	<!-Tree View Libary->
-    	<script type="text/javascript" src="%% url_for('static', filename='lib/treeview/angular-tree-control.js') %%"></script>
-		<link rel="stylesheet" type="text/css" href="%% url_for('static', filename='lib/treeview/tree-control.css') %%">
-		<link rel="stylesheet" type="text/css" href="%% url_for('static', filename='lib/treeview/tree-control-attribute.css') %%">
+    
 </html>

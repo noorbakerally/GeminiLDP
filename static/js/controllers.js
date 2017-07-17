@@ -1,21 +1,29 @@
 angular.module('myApp').controller('myCtrl', function($timeout,$rootScope,$scope,$http,$route,getDataService) {
-    $scope.treeOptions = {
-    nodeChildren: "children",
-    dirSelectable: true,
-    injectClasses: {
-        ul: "a1",
-        li: "a2",
-        liSelected: "a7",
-        iExpanded: "a3",
-        iCollapsed: "a4",
-        iLeaf: "a5",
-        label: "a6",
-        labelSelected: "a8"
+
+    $scope.treeNodes =[{
+    name: "Node 1",
+        children: [{
+            name: "Node 1.1",
+            children:[
+                {name:"Node 1.1.1"},
+                {name: "Node 1.1.2"}]
+        }]
+    },{
+        name: "Node 2",
+        children: [
+            {name: "Node 2.1"},
+            {name: "Node 2.2"}
+        ]
+    }];
+
+
+    $scope.options = {
+        expandOnClick:true,
+        showIcon: true,
+        
     }
-};
-    $scope.dataForTheTree = [
-    	{ "iri" : "http://localhost:8080/marmotta/ldp", "fetch" : 0, "children" : [] }
-    ];
+
+
 
     
 

@@ -1,2 +1,2 @@
-var app = angular.module('myApp', ['ngRoute','ui.bootstrap','treeControl']);
+var app = angular.module('myApp', ['ngRoute','ui.bootstrap','TreeWidget']);
 
