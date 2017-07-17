@@ -23,6 +23,10 @@ app.jinja_options = jinja_options
 def hello():
 	return render_template('index.html')
 
+def getName(s):
+	name = s[s.rfind("/")+1:]
+	return name
+
 @app.route("/getResource")
 def getResource():
 	ldpr = request.args.get('ldpr')
@@ -32,7 +36,7 @@ def getResource():
 
 	resource = {}
 	resource["iri"] = ldpr
-
+	resource["name"] = getName(ldpr)
 	# get rdf content for resource
 	# get all children
 	# for each children check if container or not
@@ -49,7 +53,7 @@ def getResource():
 		children = []
 		for row in qResult:
 			iri = row[0]
-			children.append({"iri":iri,"fetch":0})
+			children.append({"name":getName(iri),"iri":iri,"fetch":0})
 		resource["children"] = children
 		resource["fetch"] = 1
 	else:

@@ -1,27 +1,22 @@
 angular.module('myApp').controller('myCtrl', function($timeout,$rootScope,$scope,$http,$route,getDataService) {
 
-    $scope.treeNodes =[{
-    name: "Node 1",
-        children: [{
-            name: "Node 1.1",
-            children:[
-                {name:"Node 1.1.1"},
-                {name: "Node 1.1.2"}]
-        }]
-    },{
-        name: "Node 2",
-        children: [
-            {name: "Node 2.1"},
-            {name: "Node 2.2"}
-        ]
-    }];
+    $scope.treeNodes =[];
+
+    node = {};
+    node.iri = "http://localhost:8080/marmotta/ldp"; 
+    getDataService.getData(node).then(function(result) {
+        $scope.treeNodes.push(result);
+    }, function(){
+        
+    });
+
     $scope.options = {
         expandOnClick:true,
         showIcon: true,
     }
 
     $scope.$on('selection-changed', function (e, node) {
-        console.log(node);
+        
     });
 
 
