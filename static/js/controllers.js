@@ -16,15 +16,16 @@ angular.module('myApp').controller('myCtrl', function($timeout,$rootScope,$scope
     }, function(){
         
     });
-
+    $scope.test = "test";
+    
     //on node change handler
     $scope.$on('selection-changed', function (e, node) {
-        $scope.node = node;
+        $scope.selectedNode = node;
         console.log(node.fetch);
         if (!node.fetch){
             getDataService.getData(node).then(function(result) {
-                $scope.node.children = result.children;
-                $scope.node.fetch = 1;
+                $scope.selectedNode.children = result.children;
+                $scope.selectedNode.fetch = 1;
             }, function(){
                 
             });

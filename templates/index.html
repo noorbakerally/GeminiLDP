@@ -33,15 +33,19 @@
 
     	 <div class="container">
     	 	<div class="row">
-	            <div class="col-lg-4">
+	            <div class="col-lg-5">
 	                <h3 class="page-header">LDPRs Hierarchy</h3>
 	                <tree nodes='treeNodes' options='options'>
 		
 
 					
 	            </div>
-	            <div class="col-lg-8">
+	            <div class="col-lg-7">
 	                <h3 class="page-header">Selected LDPR Details</h3>
+	                <div ng-if="selectedNode">
+	                	Name:{{ selectedNode.name }}<br/>
+	                	IRI: <a href="{{ selectedNode.iri }}" target="_blank">{{ selectedNode.iri }}</a>
+	                </div>
 	            </div>
         	</div>
 
