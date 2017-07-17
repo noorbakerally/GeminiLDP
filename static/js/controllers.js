@@ -1,5 +1,14 @@
 angular.module('myApp').controller('myCtrl', function($timeout,$rootScope,$scope,$http,$route,getDataService,getDataService1) {
 
+    $scope.allowedContentType = ["application/json","text/turtle"]
+
+    $scope.isAllowedContentType = function (contenType) {
+        if ($scope.allowedContentType.indexOf(contenType) != -1) {
+            return true;
+        }
+        return false;
+    };
+
     //initializing the tree
     $scope.treeNodes =[];
     $scope.options = {
@@ -16,7 +25,6 @@ angular.module('myApp').controller('myCtrl', function($timeout,$rootScope,$scope
     }, function(){
         
     });
-    $scope.test = "test";
 
     $scope.load = function (){
         node = {};
@@ -52,14 +60,21 @@ angular.module('myApp').controller('myCtrl', function($timeout,$rootScope,$scope
         }
         
     });
-
-
     updateNode = function (oldObject,newObject){
         oldObject.children = newObject.children;
         oldObject.data = newObject.data;
+        console.log(newObject.type);
+        if (newObject.type.indexOf("Container") == -1){
+            if (newObject.type.indexOf("RDFSource") != -1){
+                oldObject.image = "static/lib/tree-widget/img/RDFSource.png";
+            } else {
+                oldObject.image = "static/lib/tree-widget/img/NonRDFSource.png";
+            }
+        }
+        
+
         oldObject.type = newObject.type.join();
-        console.log(oldObject.type);
+        oldObject.contentType = newObject.contentType;
     };
 
-    	
 });

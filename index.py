@@ -36,38 +36,45 @@ def getResource():
 	
 
 	resource = {}
+	resource["contentType"] = r.headers['content-type']
+	
 	resource["iri"] = ldpr
 	resource["name"] = getName(ldpr)
+	resource["status"] = r.status_code
 	# get rdf content for resource
 	# get all children
 	# for each children check if container or not
 	# if container add a dummy children
-
+	
+	if (r.status_code != 200):
+		return json.dumps(resource)
+	
+	
+	ldprContent = r.text
 	resource["type"] = []	
 	for link in requests.utils.parse_header_links(linkHeaders):
 		if link["rel"] == "type":
 			ldprType = link["url"]
 			ldprType = ldprType.replace("http://www.w3.org/ns/ldp#","")
 			resource["type"].append(ldprType)	
+	
+	if "RDFSource" not in resource["type"]:
+		resource["data"] = r.text
+		return json.dumps(resource)
 
-	if (r.status_code == 200):
-		ldprContent = r.text
-		g = Graph()
-		g.parse(data = ldprContent,format="turtle")
+	g = Graph()
+	g.parse(data = ldprContent,format="turtle")
 
-		resource["data"] = g.serialize(format="turtle")
-		query = "SELECT * WHERE { <resource> <http://www.w3.org/ns/ldp#contains> ?x }"
-		query = query.replace("resource", ldpr)
-		qResult = g.query(query)
-		children = []
-		for row in qResult:
-			iri = row[0]
-			children.append({"name":getName(iri),"iri":iri,"fetch":0})
-		resource["children"] = children
-		resource["fetch"] = 1
-	else:
-		resource["status"] = r.status_code
-
+	resource["data"] = g.serialize(format="turtle")
+	query = "SELECT * WHERE { <resource> <http://www.w3.org/ns/ldp#contains> ?x }"
+	query = query.replace("resource", ldpr)
+	qResult = g.query(query)
+	children = []
+	for row in qResult:
+		iri = row[0]
+		children.append({"name":getName(iri),"iri":iri,"fetch":0})
+	resource["children"] = children
+	resource["fetch"] = 1
 
 	
 	resourceStr = json.dumps(resource)
