@@ -46,6 +46,8 @@ angular.module('myApp').controller('myCtrl', function($timeout,$rootScope,$scope
     updateNode = function (oldObject,newObject){
         oldObject.children = newObject.children;
         oldObject.data = newObject.data;
+        oldObject.type = newObject.type.join();
+        console.log(oldObject.type);
     };
 
     	

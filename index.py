@@ -32,6 +32,8 @@ def getResource():
 	ldpr = request.args.get('ldpr')
 
 	r = requests.get(ldpr)
+	linkHeaders = r.headers.get("link")
+	
 
 	resource = {}
 	resource["iri"] = ldpr
@@ -40,6 +42,13 @@ def getResource():
 	# get all children
 	# for each children check if container or not
 	# if container add a dummy children
+
+	resource["type"] = []	
+	for link in requests.utils.parse_header_links(linkHeaders):
+		if link["rel"] == "type":
+			ldprType = link["url"]
+			ldprType = ldprType.replace("http://www.w3.org/ns/ldp#","")
+			resource["type"].append(ldprType)	
 
 	if (r.status_code == 200):
 		ldprContent = r.text
