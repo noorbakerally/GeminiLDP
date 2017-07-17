@@ -32,15 +32,15 @@ angular.module('myApp').controller('myCtrl', function($timeout,$rootScope,$scope
     //on node change handler
     $scope.$on('selection-changed', function (e, node) {
         $scope.selectedNode = node;
-        if (node.fetch == 0){
-            getDataService.getData(node).then(function(result) {
-                updateNode($scope.selectedNode,result)
-                
-                $scope.selectedNode.fetch = 1;
-            }, function(){
-                
-            });
-        }
+        //if (node.fetch == 1) {return;}
+        getDataService.getData(node).then(function(result) {
+            updateNode($scope.selectedNode,result)
+            
+            $scope.selectedNode.fetch = 1;
+        }, function(){
+            
+        });
+        
     });
 
     updateNode = function (oldObject,newObject){
