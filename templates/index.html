@@ -40,16 +40,22 @@
 
 	            <div class="col-lg-7">
 	                <h3 class="page-header">Selected LDPR Details</h3>
-	                <div ng-if="selectedNode">
-	                	Local Name:{{ selectedNode.name }}<br/>
-	                	IRI: <a href="{{ selectedNode.iri }}" target="_blank">{{ selectedNode.iri }}</a><br/>
-	                	LDPR Type: {{ selectedNode.type }}<br/>
-	                	Resource Content Type: {{ selectedNode.contentType }} 
+	                
 
+	                <div ng-if="!loading">
+	                	<div ng-if="selectedNode">
+		                	Local Name:{{ selectedNode.name }}<br/>
+		                	IRI: <a href="{{ selectedNode.iri }}" target="_blank">{{ selectedNode.iri }}</a><br/>
+		                	LDPR Type: {{ selectedNode.type }}<br/>
+		                	Resource Content Type: {{ selectedNode.contentType }} 
+		                	<div ng-if="isAllowedContentType(selectedNode.contentType)">
+		                		<textarea style="min-width: 100%;min-height:50%">{{ selectedNode.data }}</textarea>
+		                	</div>
+		                </div>
+	                </div>
+	                <div ng-if="loading" style="text-align: center">
 	                	
-	                	<div ng-if="isAllowedContentType(selectedNode.contentType)">
-	                		<textarea style="min-width: 100%;min-height:50%">{{ selectedNode.data }}</textarea>
-	                	</div>
+	                	<img src="%% url_for('static', filename='images/loading.gif') %%"><br/>Loading...
 	                </div>
 	            </div>
         	</div>

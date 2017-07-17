@@ -1,7 +1,7 @@
 angular.module('myApp').controller('myCtrl', function($timeout,$rootScope,$scope,$http,$route,getDataService,getDataService1) {
 
     $scope.allowedContentType = ["application/json","text/turtle"]
-
+    $scope.loading = false;
     $scope.isAllowedContentType = function (contenType) {
         if ($scope.allowedContentType.indexOf(contenType) != -1) {
             return true;
@@ -20,7 +20,9 @@ angular.module('myApp').controller('myCtrl', function($timeout,$rootScope,$scope
     //loading the initial node
     node = {};
     node.iri = "http://localhost:8080/marmotta/ldp"; 
+    $scope.loading =true;
     getDataService.getData(node).then(function(result) {
+        $scope.loading = false;
         $scope.treeNodes.push(result);
     }, function(){
         
@@ -29,7 +31,9 @@ angular.module('myApp').controller('myCtrl', function($timeout,$rootScope,$scope
     $scope.load = function (){
         node = {};
         node.iri = $scope.rootContainer; 
+        $scope.loading =true;
         getDataService.getData(node).then(function(result) {
+            $scope.loading =false;
             $scope.treeNodes = [];
             $scope.treeNodes.push(result);
         }, function(){
@@ -41,7 +45,9 @@ angular.module('myApp').controller('myCtrl', function($timeout,$rootScope,$scope
     $scope.$on('selection-changed', function (e, node) {
         $scope.selectedNode = node;
         //if (node.fetch == 1) {return;}
+        $scope.loading = true;
         getDataService.getData(node).then(function(result) {
+            $scope.loading = false;
             updateNode($scope.selectedNode,result)
             
             $scope.selectedNode.fetch = 1;
@@ -58,8 +64,8 @@ angular.module('myApp').controller('myCtrl', function($timeout,$rootScope,$scope
         } else {
             $scope.selectedNode.image = "static/lib/tree-widget/img/folder-closed.png";
         }
-        
     });
+    
     updateNode = function (oldObject,newObject){
         oldObject.children = newObject.children;
         oldObject.data = newObject.data;
