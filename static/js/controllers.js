@@ -43,6 +43,17 @@ angular.module('myApp').controller('myCtrl', function($timeout,$rootScope,$scope
         
     });
 
+    $scope.$on('expanded-state-changed', function (e, node) {
+        $scope.selectedNode = node;
+        if(node.expanded){
+            $scope.selectedNode.image = "static/lib/tree-widget/img/folder-open.png";
+        } else {
+            $scope.selectedNode.image = "static/lib/tree-widget/img/folder-closed.png";
+        }
+        
+    });
+
+
     updateNode = function (oldObject,newObject){
         oldObject.children = newObject.children;
         oldObject.data = newObject.data;
