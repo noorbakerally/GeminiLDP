@@ -20,9 +20,11 @@ angular.module('myApp').controller('myCtrl', function($timeout,$rootScope,$scope
     //on node change handler
     $scope.$on('selection-changed', function (e, node) {
         $scope.node = node;
+        console.log(node.fetch);
         if (!node.fetch){
             getDataService.getData(node).then(function(result) {
                 $scope.node.children = result.children;
+                $scope.node.fetch = 1;
             }, function(){
                 
             });
