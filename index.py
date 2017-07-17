@@ -32,7 +32,6 @@ def getResource():
 	ldpr = request.args.get('ldpr')
 
 	r = requests.get(ldpr)
-	print r
 
 	resource = {}
 	resource["iri"] = ldpr
@@ -47,6 +46,7 @@ def getResource():
 		g = Graph()
 		g.parse(data = ldprContent,format="turtle")
 
+		resource["data"] = g.serialize(format="turtle")
 		query = "SELECT * WHERE { <resource> <http://www.w3.org/ns/ldp#contains> ?x }"
 		query = query.replace("resource", ldpr)
 		qResult = g.query(query)
