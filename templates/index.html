@@ -19,10 +19,10 @@
 	                        <a href="#">Endpoint URL</a>
 	                    </li>
 	                    <li>
-	                    	<input class="form-control input-sm" id="inputsm" type="text" style="margin-top:10px;width:330px">
+	                    	<input class="form-control input-sm" id="inputsm" type="text" style="margin-top:10px;width:330px" ng-model="rootContainer">
 	                    </li>
 	                    <li>
-	                    	<button type="button" class="btn btn-primary" style="margin-top:8px;margin-left:2px">Load</button>
+	                    	<button type="button" class="btn btn-primary" style="margin-top:8px;margin-left:2px" ng-click="load()">Load</button>
 	                    </li>
 	                </ul>
 	            </div>
@@ -41,7 +41,7 @@
 	            <div class="col-lg-7">
 	                <h3 class="page-header">Selected LDPR Details</h3>
 	                <div ng-if="selectedNode">
-	                	Name:{{ selectedNode.name }}<br/>
+	                	Local Name:{{ selectedNode.name }}<br/>
 	                	IRI: <a href="{{ selectedNode.iri }}" target="_blank">{{ selectedNode.iri }}</a><br/>
 	                	<textarea style="min-width: 100%;min-height:50%">{{ selectedNode.data }}</textarea>
 	                </div>

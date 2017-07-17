@@ -17,7 +17,18 @@ angular.module('myApp').controller('myCtrl', function($timeout,$rootScope,$scope
         
     });
     $scope.test = "test";
-    
+
+    $scope.load = function (){
+        node = {};
+        node.iri = $scope.rootContainer; 
+        getDataService.getData(node).then(function(result) {
+            $scope.treeNodes = [];
+            $scope.treeNodes.push(result);
+        }, function(){
+            
+        });
+    }
+
     //on node change handler
     $scope.$on('selection-changed', function (e, node) {
         $scope.selectedNode = node;
