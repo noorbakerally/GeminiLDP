@@ -1,7 +1,14 @@
-angular.module('myApp').controller('myCtrl', function($timeout,$rootScope,$scope,$http,$route,getDataService) {
+angular.module('myApp').controller('myCtrl', function($timeout,$rootScope,$scope,$http,$route,getDataService,getDataService1) {
 
+    //initializing the tree
     $scope.treeNodes =[];
+    $scope.options = {
+        expandOnClick:true,
+        showIcon: true,
+    }
 
+    
+    //loading the initial node
     node = {};
     node.iri = "http://localhost:8080/marmotta/ldp"; 
     getDataService.getData(node).then(function(result) {
@@ -10,30 +17,19 @@ angular.module('myApp').controller('myCtrl', function($timeout,$rootScope,$scope
         
     });
 
-    $scope.options = {
-        expandOnClick:true,
-        showIcon: true,
-    }
-
+    //on node change handler
     $scope.$on('selection-changed', function (e, node) {
-        
+        $scope.node = node;
+        if (!node.fetch){
+            getDataService.getData(node).then(function(result) {
+                $scope.node.children = result.children;
+            }, function(){
+                
+            });
+        }
     });
 
 
 
-    
-
-    $scope.showSelected= function (node){
-        $scope.node = node;
-        getDataService.getData(node).then(function(result) {
-            $scope.node.children = result.children;
-        }, function(){
-            
-        });
-    };
-
-    $scope.onNodeToggled= function (node,expanded){
-        
-    };
-	
+    	
 });
