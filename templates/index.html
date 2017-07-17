@@ -2,12 +2,59 @@
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 	<link rel="stylesheet" href="%% url_for('static', filename='css/app.css') %%">
 
-	<div ng-app="myApp" ng-controller="myCtrl">
-			<tree nodes='treeNodes' options='options'>
+
+
+
+	<body ng-app="myApp" ng-controller="myCtrl">
+		<nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+	        <div class="container">
+	            <!-- Brand and toggle get grouped for better mobile display -->
+	            <div class="navbar-header">
+	                <a class="navbar-brand" href="#">LDP Browser</a>
+	            </div>
+	            <!-- Collect the nav links, forms, and other content for toggling -->
+	            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+	                <ul class="nav navbar-nav">
+	                    <li>
+	                        <a href="#">Endpoint URL</a>
+	                    </li>
+	                    <li>
+	                    	<input class="form-control input-sm" id="inputsm" type="text" style="margin-top:10px;width:330px">
+	                    </li>
+	                    <li>
+	                    	<button type="button" class="btn btn-primary" style="margin-top:8px;margin-left:2px">Load</button>
+	                    </li>
+	                </ul>
+	            </div>
+	        </div>
+    	</nav>
+
+
+
+    	 <div class="container">
+    	 	<div class="row">
+	            <div class="col-lg-4">
+	                <h3 class="page-header">LDPRs Hierarchy</h3>
+	                <tree nodes='treeNodes' options='options'>
 		
 
-		<div ng-view></div>
-	</div>
+					
+	            </div>
+	            <div class="col-lg-8">
+	                <h3 class="page-header">LDPR Details</h3>
+	            </div>
+        	</div>
+
+    	 </div>
+	</body>
+
+
+
+
+
+
+
+	
 
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.8/angular.js"></script>
 	<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-route.js"></script>
