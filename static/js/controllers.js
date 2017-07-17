@@ -32,10 +32,10 @@ angular.module('myApp').controller('myCtrl', function($timeout,$rootScope,$scope
     //on node change handler
     $scope.$on('selection-changed', function (e, node) {
         $scope.selectedNode = node;
-        console.log(node.fetch);
-        if (!node.fetch){
+        if (node.fetch == 0){
             getDataService.getData(node).then(function(result) {
-                $scope.selectedNode.children = result.children;
+                updateNode($scope.selectedNode,result)
+                
                 $scope.selectedNode.fetch = 1;
             }, function(){
                 
@@ -43,7 +43,10 @@ angular.module('myApp').controller('myCtrl', function($timeout,$rootScope,$scope
         }
     });
 
-
+    updateNode = function (oldObject,newObject){
+        oldObject.children = newObject.children;
+        oldObject.data = newObject.data;
+    };
 
     	
 });
