@@ -1,5 +1,6 @@
 angular.module('myApp').controller('myCtrl', function($timeout,$rootScope,$scope,$http,$route,getDataService,getDataService1) {
 
+    $scope.home = true;
     $scope.allowedContentType = ["application/json","text/turtle"]
     $scope.loading = false;
     $scope.isAllowedContentType = function (contenType) {
@@ -14,7 +15,19 @@ angular.module('myApp').controller('myCtrl', function($timeout,$rootScope,$scope
     $scope.options = {
         expandOnClick:true,
         showIcon: true,
-    }
+    };
+
+    $scope.showHome = function (){
+        $scope.home = true;
+        $scope.loading = false;
+        $scope.configuration = false;
+    };
+
+    $scope.showConfigurations = function (){
+        $scope.home = false;
+        $scope.loading = false;
+        $scope.configuration = true;
+    };
 
     
     //loading the initial node
@@ -29,6 +42,10 @@ angular.module('myApp').controller('myCtrl', function($timeout,$rootScope,$scope
     });
 
     $scope.load = function (){
+        $scope.home = false;
+        $scope.loading = false;
+        $scope.configuration = false;
+        
         node = {};
         node.iri = $scope.rootContainer; 
         $scope.loading =true;
