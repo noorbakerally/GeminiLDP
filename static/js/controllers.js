@@ -1,4 +1,6 @@
 angular.module('myApp').controller('myCtrl', function($timeout,$rootScope,$scope,$http,$route,getDataService,getDataService1) {
+    
+    
 
     $scope.home = true;
     $scope.allowedContentType = ["application/json","text/turtle"]
@@ -29,26 +31,18 @@ angular.module('myApp').controller('myCtrl', function($timeout,$rootScope,$scope
         $scope.configuration = true;
     };
 
-    
-    //loading the initial node
-    node = {};
-    node.iri = "http://localhost:8080/marmotta/ldp"; 
-    $scope.loading =true;
-    getDataService.getData(node).then(function(result) {
-        $scope.loading = false;
-        $scope.treeNodes.push(result);
-    }, function(){
-        
-    });
-
-    $scope.load = function (){
+    $scope.load = function (iri){
         $scope.home = false;
         $scope.loading = false;
         $scope.configuration = false;
         
         node = {};
-        node.iri = $scope.rootContainer; 
+        if (iri){
+            $scope.rootContainer = $scope.iri1;
+        }
+        node.iri = $scope.rootContainer;
         $scope.loading =true;
+        console.log("test");
         getDataService.getData(node).then(function(result) {
             $scope.loading =false;
             $scope.treeNodes = [];
@@ -99,5 +93,10 @@ angular.module('myApp').controller('myCtrl', function($timeout,$rootScope,$scope
         oldObject.type = newObject.type.join();
         oldObject.contentType = newObject.contentType;
     };
+
+    
+    iri1 = window.location.search;
+    $scope.iri1 = iri1.substring(1, iri1.length).replace("iri=","");
+    $scope.load(iri1); 
 
 });
