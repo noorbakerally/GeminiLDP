@@ -96,7 +96,10 @@ angular.module('myApp').controller('myCtrl', function($timeout,$rootScope,$scope
 
     
     iri1 = window.location.search;
-    $scope.iri1 = iri1.substring(1, iri1.length).replace("iri=","");
-    $scope.load(iri1); 
+    iri1 = iri1.substring(1, iri1.length).replace("iri=","");
+    if (iri1){
+    	$scope.iri1 = iri1;
+    	$scope.load(iri1); 
+    }
 
 });
