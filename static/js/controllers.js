@@ -3,7 +3,7 @@ angular.module('myApp').controller('myCtrl', function($timeout,$rootScope,$scope
     
     //display the home page in the beginning
     $scope.home = true;
-    
+    $scope.showDetails = false;
 
     $scope.allowedContentType = ["application/json","text/turtle"]
     
@@ -90,7 +90,7 @@ angular.module('myApp').controller('myCtrl', function($timeout,$rootScope,$scope
     updateNode = function (oldObject,newObject){
         oldObject.children = newObject.children;
         oldObject.data = newObject.data;
-        console.log(newObject.type);
+    
         if (newObject.type.indexOf("Container") == -1){
             if (newObject.type.indexOf("RDFSource") != -1){
                 oldObject.image = "static/lib/tree-widget/img/RDFSource.png";

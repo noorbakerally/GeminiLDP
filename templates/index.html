@@ -43,7 +43,10 @@
         	</div>
 
         	<div ng-if="selectedNode">
-        		<h3 class="page-header">Selected LDP Resource &nbsp; <button>Show Details</button></h3>
+        		<h3 class="page-header">Selected LDP Resource &nbsp; 
+        			<span ng-if="showDetails"><button>Show Details</button></span> 
+        			<span ng-if="!showDetails"><button>Hide Details</button></span> 
+        		</h3>
         		<a href="{{ selectedNode.iri }}" target="__blank">{{ selectedNode.iri }}</a>
         	</div>
 
