@@ -19,7 +19,7 @@ angular.module('myApp').controller('myCtrl', function($timeout,$uibModal,$rootSc
 
     //display the home page in the beginning
     $scope.home = true;
-    $scope.showDetails = false;
+    $scope.showDetails = true;
 
     $scope.allowedContentType = ["application/json","text/turtle"]
     
@@ -79,6 +79,14 @@ angular.module('myApp').controller('myCtrl', function($timeout,$uibModal,$rootSc
             $scope.isLoading(false);
             $scope.treeNodes = [];
             $scope.treeNodes.push(result);
+            $scope.selectedNode = node;
+
+            console.log(result);
+            node.children = result.children;
+            node.data = result.data;
+            node.type = result.type;
+            node.contenType = result.contentType;
+
         }, function(){
             
         });

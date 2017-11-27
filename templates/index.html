@@ -42,16 +42,17 @@
         		</div>
         	</div>
 
-        	<div ng-if="selectedNode">
+        	<div ng-if="selectedNode" class="row">
         		<h3 class="page-header">Selected LDP Resource &nbsp; 
         			<span ng-if="!showDetails"><button  ng-click="setShowDetails(true)">Show Details</button></span> 
         			<span ng-if="showDetails"><button ng-click="setShowDetails(false)">Hide Details</button></span> 
         		</h3>
         		<a href="{{ selectedNode.iri }}" target="__blank">{{ selectedNode.iri }}</a>
-        		<div ng-if="loading" style="text-align: center">	
-                	<img src="https://www.prizerebel.com/assets/images/progress_bar.gif"><br/>Loading LDPR:{{ selectedNode.name }}
-                </div>
         	</div>
+
+        	<div ng-if="loading" style="text-align: center" class="row">	
+                	<img src="https://www.prizerebel.com/assets/images/progress_bar.gif"><br/>Loading LDPR:{{ selectedNode.name }}
+            </div>
 
     	 	<div id="treeContainer" class="row" ng-if="!configuration && !home" style="display:none">
 	            <div ng-class="showDetails? 'pre-scrollable col-lg-5':'col-lg-5' " style="min-height: 100%"> 
@@ -69,9 +70,9 @@
 		                	IRI: <a href="{{ selectedNode.iri }}" target="_blank">{{ selectedNode.iri }}</a><br/>
 		                	LDPR Type: {{ selectedNode.type }}<br/>
 		                	Resource Content Type: {{ selectedNode.contentType }} 
-		                	<div ng-if="isAllowedContentType(selectedNode.contentType)">
-		                		<textarea readonly spellcheck="false" style="height: 100%; width: 100%; -webkit-box-sizing: border-box;-moz-box-sizing: border-box;box-sizing: border-box;background-color:#002B36;color:white">{{ selectedNode.data }}</textarea>
-		                	</div>
+		                	<!--div ng-if="isAllowedContentType(selectedNode.contentType)">
+		                	</div-->
+		                	<textarea readonly spellcheck="false" style="height: 100%; width: 100%; -webkit-box-sizing: border-box;-moz-box-sizing: border-box;box-sizing: border-box;background-color:#002B36;color:white">{{ selectedNode.data }}</textarea>
 		                </div>
 	                </div>
 	            </div>
