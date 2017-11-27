@@ -4,6 +4,7 @@ from flask import request
 import requests 
 import json
 from rdflib import Graph, Literal, BNode, Namespace, RDF, URIRef
+import urllib
 
 app = Flask(__name__)
 
@@ -30,7 +31,11 @@ def getName(s):
 @app.route("/getResource")
 def getResource():
 	ldpr = request.args.get('ldpr')
-
+	pd = ldpr.find(":")
+	ldprEncoded = ldpr[pd+1:]
+	ldprEncoded = urllib.quote(ldprEncoded.encode('utf8'))
+	ldpr = ldpr[:pd+1] + ldprEncoded
+	
 	r = requests.get(ldpr)
 	linkHeaders = r.headers.get("link")
 	
