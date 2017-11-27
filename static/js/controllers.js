@@ -1,6 +1,22 @@
-angular.module('myApp').controller('myCtrl', function($timeout,$rootScope,$scope,$http,$route,getDataService,getDataService1) {
+
+
+angular.module('myApp').controller('myCtrl', function($timeout,$uibModal,$rootScope,$scope,$http,$route,getDataService,getDataService1) {
     
-    
+    /*
+    $uibModal.open({
+          template: 'test',
+          size: 'sm',
+          controller: function($scope) {
+            $scope.name = 'top';  
+          }
+        });
+    */
+
+    $scope.isLoading = function(status) {
+            $scope.loading = status;
+    };
+   
+
     //display the home page in the beginning
     $scope.home = true;
     $scope.showDetails = false;
@@ -24,6 +40,8 @@ angular.module('myApp').controller('myCtrl', function($timeout,$rootScope,$scope
         showIcon: true,
     };
 
+
+
     $scope.setShowDetails = function (status){
         console.log("status changed");
         $scope.showDetails = status;
@@ -32,14 +50,14 @@ angular.module('myApp').controller('myCtrl', function($timeout,$rootScope,$scope
     //show the home page
     $scope.showHome = function (){
         $scope.home = true;
-        $scope.loading = false;
+        $scope.isLoading(false);
         $scope.configuration = false;
     };
 
     //show the configuration page
     $scope.showConfigurations = function (){
         $scope.home = false;
-        $scope.loading = false;
+        $scope.isLoading(false);
         $scope.configuration = true;
     };
 
@@ -47,7 +65,8 @@ angular.module('myApp').controller('myCtrl', function($timeout,$rootScope,$scope
     //responsible for loading ldprs
     $scope.load = function (iri){
         $scope.home = false;
-        $scope.loading = false;
+        $scope.isLoading(true);
+
         $scope.configuration = false;
         
         node = {};
@@ -55,10 +74,9 @@ angular.module('myApp').controller('myCtrl', function($timeout,$rootScope,$scope
             $scope.rootContainer = $scope.iri1;
         }
         node.iri = $scope.rootContainer;
-        $scope.loading =true;
         console.log("test");
         getDataService.getData(node).then(function(result) {
-            $scope.loading =false;
+            $scope.isLoading(false);
             $scope.treeNodes = [];
             $scope.treeNodes.push(result);
         }, function(){
@@ -70,9 +88,9 @@ angular.module('myApp').controller('myCtrl', function($timeout,$rootScope,$scope
     $scope.$on('selection-changed', function (e, node) {
         $scope.selectedNode = node;
         if (node.fetch == 1) {return;}
-        $scope.loading = true;
+        $scope.isLoading(true);
         getDataService.getData(node).then(function(result) {
-            $scope.loading = false;
+            $scope.isLoading(false);
             updateNode($scope.selectedNode,result)
             
             $scope.selectedNode.fetch = 1;

@@ -48,6 +48,9 @@
         			<span ng-if="showDetails"><button ng-click="setShowDetails(false)">Hide Details</button></span> 
         		</h3>
         		<a href="{{ selectedNode.iri }}" target="__blank">{{ selectedNode.iri }}</a>
+        		<div ng-if="loading" style="text-align: center">	
+                	<img src="https://www.prizerebel.com/assets/images/progress_bar.gif"><br/>Loading LDPR:{{ selectedNode.name }}
+                </div>
         	</div>
 
     	 	<div id="treeContainer" class="row" ng-if="!configuration && !home" style="display:none">
@@ -71,13 +74,6 @@
 		                	</div>
 		                </div>
 	                </div>
-
-
-	                <div ng-if="loading" style="text-align: center">	
-	                	<img src="%% url_for('static', filename='images/loading.gif') %%"><br/>Loading LDPR:{{ selectedNode.name }}
-	                </div>
-
-
 	            </div>
         	</div>
 
@@ -105,14 +101,7 @@ sys.stdout = sys.stderr</span>
 
         		</div>
         	</div>
-
-
-
-
-
     	 </div>
-
-
 
 	</body>
 
@@ -123,7 +112,6 @@ sys.stdout = sys.stderr</span>
 
 
 	
-
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.8/angular.js"></script>
 	<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular-route.js"></script>
 
