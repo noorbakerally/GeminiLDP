@@ -64,16 +64,18 @@ angular.module('myApp').controller('myCtrl', function($timeout,$uibModal,$rootSc
     //load function
     //responsible for loading ldprs
     $scope.load = function (iri){
-        $scope.home = false;
-        $scope.isLoading(true);
-
-        $scope.configuration = false;
         
+        //create a temporary root container node
         node = {};
         if (iri){
             $scope.rootContainer = $scope.iri1;
         }
         node.iri = $scope.rootContainer;
+        node.name = $scope.rootContainer;
+
+        $scope.home = false;
+        $scope.isLoading(true);
+        $scope.configuration = false;
         console.log("test");
         getDataService.getData(node).then(function(result) {
             $scope.isLoading(false);
@@ -81,11 +83,12 @@ angular.module('myApp').controller('myCtrl', function($timeout,$uibModal,$rootSc
             $scope.treeNodes.push(result);
             $scope.selectedNode = node;
 
-            console.log(result);
+        
             node.children = result.children;
             node.data = result.data;
             node.type = result.type;
             node.contenType = result.contentType;
+            node.name = result.name;
 
         }, function(){
             
