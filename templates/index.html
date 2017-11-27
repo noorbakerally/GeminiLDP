@@ -54,7 +54,7 @@
                 	<img src="https://www.prizerebel.com/assets/images/progress_bar.gif"><br/>Loading LDPR:{{ selectedNode.name }}
             </div>
 
-    	 	<div id="treeContainer" class="row" ng-if="!configuration && !home" style="display:none">
+    	 	<div id="treeContainer" class="row" ng-if="!configuration && !home && loading" style="display:none">
 	            <div ng-class="showDetails? 'pre-scrollable col-lg-5':'col-lg-5' " style="min-height: 100%"> 
 	                <h3 class="page-header">LDP Resources Hierarchy</h3>
 	                <tree nodes='treeNodes' options='options'>
