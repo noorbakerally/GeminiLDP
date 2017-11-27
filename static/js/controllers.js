@@ -1,10 +1,15 @@
 angular.module('myApp').controller('myCtrl', function($timeout,$rootScope,$scope,$http,$route,getDataService,getDataService1) {
     
     
-
+    //display the home page in the beginning
     $scope.home = true;
+    
+
     $scope.allowedContentType = ["application/json","text/turtle"]
+    
+    //do not show the loading gif in the beginning
     $scope.loading = false;
+
     $scope.isAllowedContentType = function (contenType) {
         if ($scope.allowedContentType.indexOf(contenType) != -1) {
             return true;
@@ -19,18 +24,22 @@ angular.module('myApp').controller('myCtrl', function($timeout,$rootScope,$scope
         showIcon: true,
     };
 
+    //show the home page
     $scope.showHome = function (){
         $scope.home = true;
         $scope.loading = false;
         $scope.configuration = false;
     };
 
+    //show the configuration page
     $scope.showConfigurations = function (){
         $scope.home = false;
         $scope.loading = false;
         $scope.configuration = true;
     };
 
+    //load function
+    //responsible for loading ldprs
     $scope.load = function (iri){
         $scope.home = false;
         $scope.loading = false;
@@ -68,6 +77,7 @@ angular.module('myApp').controller('myCtrl', function($timeout,$rootScope,$scope
         
     });
 
+
     $scope.$on('expanded-state-changed', function (e, node) {
         $scope.selectedNode = node;
         if(node.expanded){
@@ -95,6 +105,8 @@ angular.module('myApp').controller('myCtrl', function($timeout,$rootScope,$scope
     };
 
     
+    //if there is an iri parameter in the URL
+    //load it
     iri1 = window.location.search;
     iri1 = iri1.substring(1, iri1.length).replace("iri=","");
     if (iri1){
