@@ -24,6 +24,11 @@ angular.module('myApp').controller('myCtrl', function($timeout,$rootScope,$scope
         showIcon: true,
     };
 
+    $scope.setShowDetails = function (status){
+        console.log("status changed");
+        $scope.showDetails = status;
+    };
+
     //show the home page
     $scope.showHome = function (){
         $scope.home = true;

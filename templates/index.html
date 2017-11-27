@@ -44,19 +44,19 @@
 
         	<div ng-if="selectedNode">
         		<h3 class="page-header">Selected LDP Resource &nbsp; 
-        			<span ng-if="showDetails"><button>Show Details</button></span> 
-        			<span ng-if="!showDetails"><button>Hide Details</button></span> 
+        			<span ng-if="!showDetails"><button  ng-click="setShowDetails(true)">Show Details</button></span> 
+        			<span ng-if="showDetails"><button ng-click="setShowDetails(false)">Hide Details</button></span> 
         		</h3>
         		<a href="{{ selectedNode.iri }}" target="__blank">{{ selectedNode.iri }}</a>
         	</div>
 
     	 	<div id="treeContainer" class="row" ng-if="!configuration && !home" style="display:none">
-	            <div class="pre-scrollable col-lg-5" style="min-height: 100%"> 
+	            <div ng-class="showDetails? 'pre-scrollable col-lg-5':'col-lg-5' " style="min-height: 100%"> 
 	                <h3 class="page-header">LDP Resources Hierarchy</h3>
 	                <tree nodes='treeNodes' options='options'>
 	            </div>
 
-	            <div class="col-lg-7">
+	            <div class="col-lg-7" ng-if="showDetails">
 	                <h3 class="page-header">Selected LDPR Details</h3>
 	                
 
