@@ -11,6 +11,7 @@ angular.module('myApp').controller('myCtrl', function($timeout,$uibModal,$rootSc
           }
         });
     */
+    $scope.floading = false;
 
     $scope.isLoading = function(status) {
             $scope.loading = status;
@@ -75,9 +76,12 @@ angular.module('myApp').controller('myCtrl', function($timeout,$uibModal,$rootSc
 
         $scope.home = false;
         $scope.isLoading(true);
+        $scope.floading = true;
         $scope.configuration = false;
         console.log("test");
         getDataService.getData(node).then(function(result) {
+            $scope.floading = false;
+            
             $scope.isLoading(false);
             $scope.treeNodes = [];
             $scope.treeNodes.push(result);
