@@ -17,6 +17,10 @@ angular.module('myApp').controller('myCtrl', function($timeout,$uibModal,$rootSc
             $scope.loading = status;
     };
    
+    $scope.loadTopContainer = function(keyEvent) {
+        if (keyEvent.which === 13) $scope.load();
+    }
+
 
     //display the home page in the beginning
     $scope.home = true;

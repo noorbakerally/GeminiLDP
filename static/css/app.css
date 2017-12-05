@@ -10,6 +10,12 @@ body {
     font-size:17px;
 }
 
+.topItems {
+	margin:10px;
+}
+
+
+
 .portfolio-item {
     margin-bottom: 25px;
 }
