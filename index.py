@@ -25,6 +25,8 @@ def hello():
 	return render_template('index.html')
 
 def getName(s):
+	if s[-1] == "/":
+		s = s[:-1]
 	name = s[s.rfind("/")+1:]
 	return name
 
@@ -37,7 +39,6 @@ def getResource():
 	ldpr = ldpr[:pd+1] + ldprEncoded
 	
 	r = requests.get(ldpr)
-	linkHeaders = r.headers.get("link")
 	
 
 	resource = {}
@@ -57,26 +58,33 @@ def getResource():
 	
 	ldprContent = r.text
 	resource["type"] = []	
-	for link in requests.utils.parse_header_links(linkHeaders):
-		if link["rel"] == "type":
+	linkHeaders = r.headers.get("link")
+	linkHeaders = requests.utils.parse_header_links(r.headers.get("link"))
+	for link in linkHeaders:
+		if "rel" in link and link["rel"] == "type":
 			ldprType = link["url"]
 			ldprType = ldprType.replace("http://www.w3.org/ns/ldp#","")
 			resource["type"].append(ldprType)	
 	
 	if "RDFSource" not in resource["type"]:
 		resource["data"] = r.text
-		return json.dumps(resource)
 
 	g = Graph()
-	g.parse(data = ldprContent,format="turtle")
+	publicId = ldpr
+	if publicId[-1] != "/":
+		publicId = publicId + "/"	
+	g.parse(data = ldprContent,format="turtle",publicID=publicId)
 
 	resource["data"] = g.serialize(format="turtle")
 	query = "SELECT * WHERE { <resource> <http://www.w3.org/ns/ldp#contains> ?x }"
 	query = query.replace("resource", ldpr)
+	#print query
+	#return resource["data"]
 	qResult = g.query(query)
 	children = []
 	for row in qResult:
 		iri = row[0]
+		print iri
 		children.append({"name":getName(iri),"iri":iri,"fetch":0})
 	resource["children"] = children
 	resource["fetch"] = 1
